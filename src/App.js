@@ -3,6 +3,14 @@ import Person from './Person/Person';
 import './App.css';
 
 class App extends Component {
+  // constructor(props){
+  //   super(props){
+  //     this.state={
+  //       person: [];
+  //     }
+  //   }
+  // }
+  
   state = {
     persons: [
       { name: "Arpit", age: 22 },
