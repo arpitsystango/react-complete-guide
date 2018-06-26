@@ -8,18 +8,9 @@ class App extends Component {
       { name: "Arpit", age: 22 },
       { name: "Aditya", age: 14 },
       { name: "Aditi", age: 22 }
-    ]
-  }
-
-  switchNameHandler = (newName) => {
-    // console.log("Button Clicked!");
-    this.setState({
-      persons: [
-        { name: newName, age: 22 },
-        { name: "Aditya Parmar", age: 15 },
-        { name: "Aditi Soni", age: 21 }
-      ]
-    });
+    ],
+    otherState: 'some other value.',
+    showPersons: false
   }
 
   nameChangedHandler = (event) => {
@@ -32,6 +23,19 @@ class App extends Component {
     });
   }
 
+  deletePersonHandler = (personIndex) => {
+    // const persons = this.state.persons.splice();
+    const persons = [...this.state.persons]; // More modern way
+    persons.splice(personIndex, 1);
+    this.setState({persons});
+  }
+
+  togglePersonsHandler = () => {
+    this.setState({
+      showPersons: !this.state.showPersons
+    });
+  }
+
   render() {
     const style = {
       backgroundColor: 'white',
@@ -41,24 +45,37 @@ class App extends Component {
       cursor: 'pointer'
     };
 
+    let persons = null;
+
+    if (this.state.showPersons) {
+      persons = (
+        <div>
+          {
+            this.state.persons.map((person, index) => {
+              return (
+                <Person
+                  name={person.name}
+                  age={person.age}
+                  click={() => this.deletePersonHandler(index)}
+                />
+              );
+            })
+          }
+        </div>
+      );
+    }
+
     return (
       <div className="App">
         <h1>I am React Component!</h1>
         <p>This is really working!</p>
         <button
           style={style}
-          onClick={() => this.switchNameHandler("this can be inefficient though can be used")}
+          onClick={this.togglePersonsHandler}
         >
-          Switch Name
+          Toggle Person
         </button>
-        <Person name={this.state.persons[0].name} age={this.state.persons[0].age} />
-        <Person
-          name={this.state.persons[1].name}
-          age={this.state.persons[1].age}
-          click={this.switchNameHandler.bind(this, "Use this more often")}
-          changed={this.nameChangedHandler}
-        />
-        <Person name={this.state.persons[2].name} age={this.state.persons[2].age} />
+        {persons}
       </div>
     );
   }
