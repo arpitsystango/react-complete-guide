@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Radium from 'radium';
 import Person from './Person/Person';
 import './App.css';
 
@@ -15,7 +16,7 @@ class App extends Component {
 
   nameChangedHandler = (personId, event) => {
     const personIndex = this.state.persons.findIndex(person => person.id === personId);
-    let person = {...this.state.persons[personIndex]};
+    let person = { ...this.state.persons[personIndex] };
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
@@ -27,7 +28,7 @@ class App extends Component {
     // const persons = this.state.persons.splice();
     const persons = [...this.state.persons]; // More modern way
     persons.splice(personIndex, 1);
-    this.setState({persons});
+    this.setState({ persons });
   }
 
   togglePersonsHandler = () => {
@@ -43,7 +44,11 @@ class App extends Component {
       font: 'inherit',
       border: '1px solid blue',
       padding: '8px',
-      cursor: 'pointer'
+      cursor: 'pointer',
+      ':hover': {
+        backgroundColor: 'lightgreen',
+        color: 'black'
+      }
     };
 
     let persons = null;
@@ -68,12 +73,16 @@ class App extends Component {
       );
 
       style.backgroundColor = "red";
+      style[':hover'] = {
+        backgroundColor: "salmon",
+        color: "black"
+      };
     }
 
     console.log(persons);
 
     const classes = [];
-    
+
     if (this.state.persons.length <= 2) {
       classes.push("red");
     }
@@ -98,4 +107,4 @@ class App extends Component {
   }
 }
 
-export default App;
+export default Radium(App);
