@@ -5,22 +5,22 @@ import './App.css';
 class App extends Component {
   state = {
     persons: [
-      { name: "Arpit", age: 22 },
-      { name: "Aditya", age: 14 },
-      { name: "Aditi", age: 22 }
+      { id: "a", name: "Arpit", age: 22 },
+      { id: "b", name: "Aditya", age: 14 },
+      { id: "c", name: "Aditi", age: 22 }
     ],
     otherState: 'some other value.',
     showPersons: false
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons: [
-        { name: "Arpit", age: 22 },
-        { name: event.target.value, age: 14 },
-        { name: "Aditi", age: 22 }
-      ]
-    });
+  nameChangedHandler = (personId, event) => {
+    const personIndex = this.state.persons.findIndex(person => person.id === personId);
+    let person = {...this.state.persons[personIndex]};
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personId] = person;
+    this.setState({ persons });
   }
 
   deletePersonHandler = (personIndex) => {
@@ -56,7 +56,9 @@ class App extends Component {
                 <Person
                   name={person.name}
                   age={person.age}
-                  click={() => this.deletePersonHandler(index)}
+                  click={this.deletePersonHandler.bind(this, index)}
+                  key={person.id}
+                  changed={this.nameChangedHandler.bind(this, person.id)}
                 />
               );
             })
