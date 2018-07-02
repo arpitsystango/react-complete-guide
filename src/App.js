@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Person from './Person/Person';
-import './App.css';
+import appCssClasses from './App.css';
 
 class App extends Component {
   state = {
@@ -19,7 +19,7 @@ class App extends Component {
     person.name = event.target.value;
 
     const persons = [...this.state.persons];
-    persons[personId] = person;
+    persons[personIndex] = person;
     this.setState({ persons });
   }
 
@@ -37,16 +37,8 @@ class App extends Component {
   }
 
   render() {
-    const style = {
-      backgroundColor: 'green',
-      color: 'white',
-      font: 'inherit',
-      border: '1px solid blue',
-      padding: '8px',
-      cursor: 'pointer'
-    };
-
     let persons = null;
+    let btnClass = '';
 
     if (this.state.showPersons) {
       persons = (
@@ -67,25 +59,25 @@ class App extends Component {
         </div>
       );
 
-      style.backgroundColor = "red";
+      btnClass = appCssClasses.Red;
     }
 
     const classes = [];
 
     if (this.state.persons.length <= 2) {
-      classes.push("red");
+      classes.push(appCssClasses.red);
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push("bold");
+      classes.push(appCssClasses.bold);
     }
 
     return (
-      <div className="App">
+      <div className={appCssClasses.App}>
         <h1>I am React Component!</h1>
         <p className={classes.join(" ")}>This is really working!</p>
         <button
-          style={style}
+          className={btnClass}
           onClick={this.togglePersonsHandler}
         >
           Toggle Person
