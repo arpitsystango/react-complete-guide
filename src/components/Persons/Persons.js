@@ -5,7 +5,6 @@ const persons = (props) => (
   props.persons.map((person, index) => {
     return (
       <Person
-        arpit="Hello World"
         name={person.name}
         age={person.age}
         click={props.clicked.bind(null, index)}
