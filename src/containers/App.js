@@ -4,15 +4,38 @@ import Persons from '../components/Persons/Persons';
 import classes from './App.css';
 
 class App extends Component {
-  state = {
-    persons: [
-      { id: "a", name: "Arpit", age: 22 },
-      { id: "b", name: "Aditya", age: 14 },
-      { id: "c", name: "Aditi", age: 22 }
-    ],
-    otherState: 'some other value.',
-    showPersons: false
+  constructor(props) {
+    super(props);
+    console.log("[App.js] Inside Constructor");
+
+    this.state = {
+      persons: [
+        { id: "a", name: "Arpit", age: 22 },
+        { id: "b", name: "Aditya", age: 14 },
+        { id: "c", name: "Aditi", age: 22 }
+      ],
+      otherState: 'some other value.',
+      showPersons: false
+    };
   }
+
+  componentWillMount() {
+    console.log("[App.js] Inside componentWillMount()");
+  }
+
+  componentDidMount() {
+    console.log("[App.js] Inside componentDidMount()");
+  }
+
+  // state = {
+  //   persons: [
+  //     { id: "a", name: "Arpit", age: 22 },
+  //     { id: "b", name: "Aditya", age: 14 },
+  //     { id: "c", name: "Aditi", age: 22 }
+  //   ],
+  //   otherState: 'some other value.',
+  //   showPersons: false
+  // }
 
   nameChangedHandler = (personId, event) => {
     debugger
@@ -40,6 +63,7 @@ class App extends Component {
   }
 
   render() {
+    console.log("[App.js] Inside render()");
     let persons = null;
 
     if (this.state.showPersons) {
