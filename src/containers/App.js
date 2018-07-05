@@ -1,7 +1,7 @@
-import React, { PureComponent } from 'react';
+import React, { PureComponent, Fragment } from 'react';
 import Cockpit from '../components/Cockpit/Cockpit';
 import Persons from '../components/Persons/Persons';
-import WithClass from '../hoc/withClass';
+import withClass from '../hoc/withClass';
 import classes from './App.css';
 
 class App extends PureComponent {
@@ -91,7 +91,7 @@ class App extends PureComponent {
     }
 
     return (
-      <WithClass classes={classes.App}>
+      <Fragment>
         <button onClick={() => { this.setState({ showPersons: true }) }}>Show Persons</button>
         <Cockpit
           title={this.props.title}
@@ -100,9 +100,9 @@ class App extends PureComponent {
           clicked={this.togglePersonsHandler}
         />
         {persons}
-      </WithClass>
+      </Fragment>
     );
   }
 }
 
-export default App;
+export default withClass(App, classes.App);

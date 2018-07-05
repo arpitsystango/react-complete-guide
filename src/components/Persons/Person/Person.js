@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PersonCSS from './Person.css';
 import WithClass from '../../../hoc/withClass';
 
@@ -29,13 +29,13 @@ class Person extends Component {
   render() {
     console.log("[Person.js] Inside render()");
     return (
-      <WithClass classes={PersonCSS.Person}>
+      <Fragment>
         <p onClick={this.props.click}>I am a {this.props.name} and I am {this.props.age} years old.</p>
         <p>{this.props.children}</p>
         <input type="text" onChange={this.props.changed} value={this.props.name} />
-      </WithClass>
+      </Fragment>
     );
   }
 }
 
-export default Person;
+export default WithClass(Person, PersonCSS.Person);
