@@ -18,7 +18,9 @@ const withClass = (ComponentToWrap, className) => {
     }
   }
 
-  return React.createRef((props, ref) => (<WithClass forwardedRef={ref} {...props} />));
+  return React.forwardRef((props, ref) => {
+    return <WithClass forwardedRef={ref} {...props} />;
+  });
 };
 
 export default withClass;

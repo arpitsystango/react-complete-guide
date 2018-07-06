@@ -55,8 +55,6 @@ class App extends PureComponent {
   // }
 
   nameChangedHandler = (personId, event) => {
-    debugger
-    console.log(this.arpit);
     const personIndex = this.state.persons.findIndex(person => person.id === personId);
     let person = { ...this.state.persons[personIndex] };
     person.name = event.target.value;
