@@ -15,6 +15,8 @@ class Persons extends PureComponent {
       otherState: 'some other value.',
       showPersons: false
     };
+
+    this.lastPersonRef = React.createRef();
   }
 
   componentWillMount() {
@@ -23,6 +25,7 @@ class Persons extends PureComponent {
 
   componentDidMount() {
     console.log("[Persons.js] Inside componentDidMount()");
+    this.lastPersonRef.current.focus();
   }
 
   componentWillReceiveProps(nextProps) {
@@ -51,6 +54,7 @@ class Persons extends PureComponent {
         <Person
           name={person.name}
           position={index}
+          forwardedRef={this.lastPersonRef}
           age={person.age}
           click={this.props.clicked.bind(null, index)}
           key={person.id}
