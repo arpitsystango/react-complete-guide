@@ -8,15 +8,17 @@ const withClass = (ComponentToWrap, className) => {
   // );
 
   /** We can also return class component using Anonymous Class */
-  return class extends Component {
+  const WithClass = class extends Component {
     render() {
       return (
         <div className={className}>
-          <ComponentToWrap {...this.props} />
+          <ComponentToWrap ref={this.props.forwardedRef} {...this.props} />
         </div>
       );
     }
   }
+
+  return React.createRef((props, ref) => (<WithClass forwardedRef={ref} {...props} />));
 };
 
 export default withClass;
