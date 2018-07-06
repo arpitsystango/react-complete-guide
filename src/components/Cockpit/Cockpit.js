@@ -27,6 +27,7 @@ const cockpit = (props) => {
       >
         Toggle Person
       </button>
+      <button onClick={props.login}>{props.isAuthenticated ? "Sign Out" : "Log In"}</button>
     </Fragment>
   );
 }
